@@ -7,7 +7,7 @@ public class gds{
         int adjacency_matrix[][];
         int degrees[][];
         int i,j;
-        int status[];
+        String colours[];
         int coloured=0;
         int current_node;
         int current_degree;
@@ -21,8 +21,11 @@ public class gds{
 
     	    adjacency_matrix = new int[number_of_nodes][number_of_nodes];
             degrees = new int[number_of_nodes][2];
-            status= new int[number_of_nodes];
+            colours= new String[number_of_nodes];
             current_degree=number_of_nodes-1;
+            
+            for(i=0;i<number_of_nodes;i++)
+                colours[i]="White";
 
             // scan matrix and calculate dgrees
        	    System.out.println("Enter the adjacency matrix");
@@ -41,8 +44,8 @@ public class gds{
                 current_node=degrees[current_degree][0];
                 all_coloured=1;
                 for(i=0;i<number_of_nodes;i++){
-                    if(adjacency_matrix[current_node][i]==1 && status[i] == 0){
-                        status[i]=2;
+                    if(adjacency_matrix[current_node][i]==1 && colours[i] == "White"){
+                        colours[i]="Grey";
                         coloured++;
                         all_coloured=0;
                     }
@@ -50,24 +53,27 @@ public class gds{
                 //if all neighboures colored do not do anything
                 if(all_coloured==0){
                     //if it is coloured do not change the coloured count
-                    if(status[current_node]==0)
+                    if(colours[current_node]=="White")
                         coloured++;
-                    status[current_node]=1;
+                    colours[current_node]="Black";
                     domination_number++;
                 }
+
+                /*
+                //print debugging data
                 System.out.println("");
                 for(i=0;i<number_of_nodes;i++)
-                    System.out.println((degrees[i][0] + 1) + " - " + degrees[i][1] + " - " + status[degrees[i][0]]);
+                    System.out.println((degrees[i][0] + 1) + " - " + degrees[i][1] + " - " + colours[degrees[i][0]]);
                 System.out.println("");
                 System.out.println("coloured: "+coloured);
-                System.out.println("");
+                System.out.println("");*/
 
                 current_degree--;
             }
             
             System.out.print("\nThe dominating set is: ");
             for(i=0;i<number_of_nodes;i++){
-                if(status[i]==1)
+                if(colours[i]=="Black")
                     System.out.print((i+1) +" ");
             }
             System.out.println("");
