@@ -59,14 +59,14 @@ public class gds{
                     domination_number++;
                 }
 
-                /*
+                
                 //print debugging data
                 System.out.println("");
                 for(i=0;i<number_of_nodes;i++)
                     System.out.println((degrees[i][0] + 1) + " - " + degrees[i][1] + " - " + colours[degrees[i][0]]);
                 System.out.println("");
                 System.out.println("coloured: "+coloured);
-                System.out.println("");*/
+                System.out.println("");
 
                 current_degree--;
             }
